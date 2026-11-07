@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#010206">
+  <title>Painel de pedidos</title>
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+
+  <!-- ========== LOGIN ========== -->
+  <section class="login" id="login" hidden>
+    <form class="login__box" id="loginForm" novalidate>
+      <h1 id="loginTitulo">Painel de pedidos</h1>
+      <p class="login__sub">Acesso da equipe</p>
+      <label>E-mail
+        <input type="email" id="lEmail" autocomplete="username" required>
+      </label>
+      <label>Senha
+        <input type="password" id="lSenha" autocomplete="current-password" required>
+      </label>
+      <p class="erro" id="lErro" role="alert" hidden></p>
+      <button type="submit" class="btn btn--primary btn--block" id="lBtn">Entrar</button>
+    </form>
+  </section>
+
+  <!-- ========== PAINEL ========== -->
+  <div id="app" hidden>
+    <header class="top">
+      <div class="top__id">
+        <h1 id="titulo">Painel de pedidos</h1>
+        <span class="conn" id="conn" role="status">Conectando…</span>
+      </div>
+      <div class="top__act">
+        <button type="button" class="btn btn--ghost" id="btnImp" title="Imprime sozinho cada pedido novo">🖨️ Auto-impressão: desligada</button>
+        <button type="button" class="btn btn--ghost" id="btnSom">🔔 Som</button>
+        <button type="button" class="btn btn--ghost" id="btnSair">Sair</button>
+      </div>
+    </header>
+
+    <nav class="nav" id="nav" aria-label="Seções">
+      <button type="button" class="nav__b is-active" data-visao="pedidos">📋 Pedidos</button>
+      <button type="button" class="nav__b" data-visao="mesas">🍽️ Mesas <b id="nMesas">0</b></button>
+      <button type="button" class="nav__b" data-visao="caixa">💰 Caixa</button>
+      <button type="button" class="nav__b" data-visao="ranking">🏆 Mais vendidos</button>
+      <button type="button" class="nav__b" data-visao="historico">🔎 Histórico</button>
+    </nav>
+
+    <nav class="bar" id="barPedidos" aria-label="Filtros">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab is-active" data-aba="ativos" role="tab">Ativos <b id="nAtivos">0</b></button>
+        <button type="button" class="tab" data-aba="finalizados" role="tab">Finalizados (24 h) <b id="nFinal">0</b></button>
+      </div>
+      <div class="chips" id="chips">
+        <button type="button" class="chip is-active" data-filtro="todos">Todos</button>
+        <button type="button" class="chip" data-filtro="local">🍽️ No local</button>
+        <button type="button" class="chip" data-filtro="entrega">🛵 Entrega</button>
+        <button type="button" class="chip" data-filtro="retirada">🏪 Retirada</button>
+      </div>
+    </nav>
+
+    <main id="board" class="board"></main>
+    <main id="view" class="view" hidden></main>
+  </div>
+
+  <!-- janela "receber pagamento / fechar conta" -->
+  <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitulo">
+    <div class="modal__box">
+      <h2 id="mTitulo"></h2>
+      <p class="modal__sub" id="mResumo"></p>
+      <p class="modal__total" id="mTotal"></p>
+      <p class="modal__lbl">Forma de pagamento</p>
+      <div class="formas" id="mFormas" role="group" aria-label="Forma de pagamento"></div>
+      <div class="modal__act">
+        <button type="button" class="btn btn--ghost" id="mCancel">Voltar</button>
+        <button type="button" class="btn btn--primary" id="mOk">Confirmar pagamento</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <div class="ticket" id="ticket" aria-hidden="true"></div>
+
+  <script src="config.js"></script>
+  <script src="painel.js"></script>
+</body>
+</html>
